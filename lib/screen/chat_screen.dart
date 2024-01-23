@@ -1,11 +1,34 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/widget/chat_message.dart';
+import 'package:flutter_chat_app/widget/new_message.dart';
 
-class ChatScreen extends StatelessWidget {
+final _firebaseMessaging = FirebaseMessaging.instance;
+
+class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
 
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
   void _logoutAction() {
     FirebaseAuth.instance.signOut();
+  }
+
+  void setupPushNotifications() async {
+    await _firebaseMessaging.requestPermission();
+
+    // await _firebaseMessaging.getToken();
+    _firebaseMessaging.subscribeToTopic('chat');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setupPushNotifications();
   }
 
   @override
@@ -25,13 +48,13 @@ class ChatScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Text(
-          'Logged In',
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
-        ),
+      body: const Column(
+        children: [
+          Expanded(
+            child: ChatMessage(),
+          ),
+          NewMessage(),
+        ],
       ),
     );
   }
