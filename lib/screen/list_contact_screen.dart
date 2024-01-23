@@ -1,24 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/widget/chat_message.dart';
-import 'package:flutter_chat_app/widget/new_message.dart';
+import 'package:flutter_chat_app/widget/list_contact.dart';
 
 final _firebaseMessaging = FirebaseMessaging.instance;
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({
-    super.key,
-    required this.userId,
-  });
-
-  final String userId;
+class ListContactScreen extends StatefulWidget {
+  const ListContactScreen({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<ListContactScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends State<ListContactScreen> {
   void _logoutAction() {
     FirebaseAuth.instance.signOut();
   }
@@ -40,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat'),
+        title: const Text('List Contact'),
         actions: [
           IconButton(
             onPressed: () {
@@ -53,17 +47,12 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ],
       ),
-      body: Column(
+      body: const Column(
         children: [
           Expanded(
-            child: ChatMessage(
-              partnerId: widget.userId,
-            ),
-            // child: ListChat(),
+            child: ListContact(),
           ),
-          NewMessage(
-            partnerId: widget.userId,
-          ),
+          // NewMessage(),
         ],
       ),
     );

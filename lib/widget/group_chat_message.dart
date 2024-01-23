@@ -6,13 +6,10 @@ import 'package:flutter_chat_app/widget/message_bubble.dart';
 final _firebaseFirestore = FirebaseFirestore.instance;
 final _firebaseAuth = FirebaseAuth.instance;
 
-class ChatMessage extends StatelessWidget {
-  const ChatMessage({
+class GroupChatMessage extends StatelessWidget {
+  const GroupChatMessage({
     super.key,
-    required this.partnerId,
   });
-
-  final String partnerId;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +17,7 @@ class ChatMessage extends StatelessWidget {
 
     return StreamBuilder(
       stream: _firebaseFirestore
-          .collection('chat')
+          .collection('group-chat')
           // .where('partnerId', isEqualTo: partnerId)
           // .where('userId', isEqualTo: authUser.uid)
           .orderBy(

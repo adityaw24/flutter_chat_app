@@ -7,19 +7,19 @@ final _firebaseAuth = FirebaseAuth.instance;
 final _firebaseStorage = FirebaseStorage.instance;
 final _firebaseFirestore = FirebaseFirestore.instance;
 
-class NewMessage extends StatefulWidget {
-  const NewMessage({
+class NewGroupMessage extends StatefulWidget {
+  const NewGroupMessage({
     super.key,
-    required this.partnerId,
+    required this.groupId,
   });
 
-  final String partnerId;
+  final String groupId;
 
   @override
-  State<NewMessage> createState() => _NewMessageState();
+  State<NewGroupMessage> createState() => _NewMessageState();
 }
 
-class _NewMessageState extends State<NewMessage> {
+class _NewMessageState extends State<NewGroupMessage> {
   final _messageController = TextEditingController();
 
   @override
@@ -42,10 +42,11 @@ class _NewMessageState extends State<NewMessage> {
     final userData =
         await _firebaseFirestore.collection('users').doc(user.uid).get();
 
-    await _firebaseFirestore.collection('chat').add({
+    await _firebaseFirestore.collection('group-chat').add({
       'text': enteredMessage,
       'userId': user.uid,
-      'partnerId': widget.partnerId,
+      // 'partnerId': widget.partnerId,
+      'groupId': widget.groupId,
       'username': userData.data()!['username'],
       'userImage': userData.data()!['image'],
       'createdAt': Timestamp.now(),

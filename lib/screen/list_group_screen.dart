@@ -1,24 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_app/widget/chat_message.dart';
-import 'package:flutter_chat_app/widget/new_message.dart';
+import 'package:flutter_chat_app/widget/list_group.dart';
 
 final _firebaseMessaging = FirebaseMessaging.instance;
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({
-    super.key,
-    required this.userId,
-  });
-
-  final String userId;
+class ListGroupScreen extends StatefulWidget {
+  const ListGroupScreen({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<ListGroupScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends State<ListGroupScreen> {
   void _logoutAction() {
     FirebaseAuth.instance.signOut();
   }
@@ -40,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat'),
+        title: const Text('List Group'),
         actions: [
           IconButton(
             onPressed: () {
@@ -55,15 +49,18 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: ChatMessage(
-              partnerId: widget.userId,
-            ),
-            // child: ListChat(),
+          TextButton.icon(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+            label: const Text('New Group'),
           ),
-          NewMessage(
-            partnerId: widget.userId,
+          const SizedBox(
+            height: 10,
           ),
+          const Expanded(
+            child: ListGroup(),
+          ),
+          // NewMessage(),
         ],
       ),
     );
