@@ -34,6 +34,7 @@ class _AuthScreenState extends State<AuthScreen> {
     }
 
     _form.currentState!.save();
+    FocusScope.of(context).unfocus();
 
     setState(() {
       _isAuthenticated = true;
@@ -41,7 +42,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
     try {
       if (_isLogin) {
-        final userCredentials = await _firebaseAuth.signInWithEmailAndPassword(
+        await _firebaseAuth.signInWithEmailAndPassword(
           email: _enteredEmail,
           password: _enteredPassword,
         );
@@ -173,7 +174,7 @@ class _AuthScreenState extends State<AuthScreen> {
                             height: 12,
                           ),
                           if (_isAuthenticated)
-                            const CircularProgressIndicator(),
+                            const CircularProgressIndicator.adaptive(),
                           if (!_isAuthenticated)
                             ElevatedButton(
                               onPressed: _submit,

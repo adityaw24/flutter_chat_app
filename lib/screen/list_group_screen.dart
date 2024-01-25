@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/widget/add_group_chat.dart';
 import 'package:flutter_chat_app/widget/list_group.dart';
 
 final _firebaseMessaging = FirebaseMessaging.instance;
@@ -22,6 +23,19 @@ class _ChatScreenState extends State<ListGroupScreen> {
 
     // await _firebaseMessaging.getToken();
     _firebaseMessaging.subscribeToTopic('chat');
+  }
+
+  void _addNewGroup() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      useSafeArea: true,
+      context: context,
+      // constraints: BoxConstraints(
+      //   minWidth: MediaQuery.of(context).size.width,
+      //   minHeight: MediaQuery.of(context).size.height,
+      // ),
+      builder: (context) => const AddGroupChat(),
+    );
   }
 
   @override
@@ -50,7 +64,9 @@ class _ChatScreenState extends State<ListGroupScreen> {
       body: Column(
         children: [
           TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              _addNewGroup();
+            },
             icon: const Icon(Icons.add),
             label: const Text('New Group'),
           ),

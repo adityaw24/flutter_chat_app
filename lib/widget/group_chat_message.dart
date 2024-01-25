@@ -9,7 +9,10 @@ final _firebaseAuth = FirebaseAuth.instance;
 class GroupChatMessage extends StatelessWidget {
   const GroupChatMessage({
     super.key,
+    required this.groupId,
   });
+
+  final String groupId;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +23,7 @@ class GroupChatMessage extends StatelessWidget {
           .collection('group-chat')
           // .where('partnerId', isEqualTo: partnerId)
           // .where('userId', isEqualTo: authUser.uid)
+          .where('groupId', isEqualTo: groupId)
           .orderBy(
             'createdAt',
             descending: true,

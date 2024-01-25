@@ -71,24 +71,30 @@ class _ListChatState extends State<ListGroup> {
           itemBuilder: (context, index) {
             final groups = loadedGroup[index].data();
 
-            return ListTile(
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage(
-                  groups['image'],
+            return Padding(
+              padding: const EdgeInsets.symmetric(
+                // horizontal: 15,
+                vertical: 8,
+              ),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                    groups['image'],
+                  ),
+                  backgroundColor:
+                      Theme.of(context).colorScheme.primary.withAlpha(180),
+                  radius: 30,
                 ),
-                backgroundColor:
-                    Theme.of(context).colorScheme.primary.withAlpha(180),
-                radius: 30,
+                title: Text(
+                  groups['name'],
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                ),
+                onTap: () {
+                  _goChat(loadedGroup[index].id, groups['name']);
+                },
               ),
-              title: Text(
-                groups['name'],
-                style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
-                    ),
-              ),
-              onTap: () {
-                _goChat(loadedGroup[index].id, groups['name']);
-              },
             );
           },
         );

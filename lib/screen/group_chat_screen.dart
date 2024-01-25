@@ -57,8 +57,10 @@ class _ChatScreenState extends State<GroupChatScreen> {
       ),
       body: Column(
         children: [
-          const Expanded(
-            child: GroupChatMessage(),
+          Expanded(
+            child: GroupChatMessage(
+              groupId: widget.groupId,
+            ),
           ),
           NewGroupMessage(
             groupId: widget.groupId,
