@@ -38,7 +38,7 @@ class _NewMessageState extends State<NewGroupMessage> {
     _messageController.clear();
     FocusScope.of(context).unfocus();
 
-    final user = await _firebaseAuth.currentUser!;
+    final user = _firebaseAuth.currentUser!;
     final userData =
         await _firebaseFirestore.collection('users').doc(user.uid).get();
 

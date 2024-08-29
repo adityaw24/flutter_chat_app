@@ -78,14 +78,14 @@ class _AddGroupChatState extends State<AddGroupChat> {
 
   @override
   Widget build(BuildContext context) {
-    final _keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
 
     // return LayoutBuilder(
     //   builder: (context, constraints) {
     // final _width = constraints.maxWidth;
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(16, 16, 16, _keyboardSpace + 16),
+      padding: EdgeInsets.fromLTRB(16, 16, 16, keyboardSpace + 16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,

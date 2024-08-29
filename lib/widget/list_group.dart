@@ -20,7 +20,7 @@ class _ListChatState extends State<ListGroup> {
   Widget build(BuildContext context) {
     // final authUser = _firebaseAuth.currentUser!;
 
-    void _goChat(String groupId, String groupName) {
+    void goChat(String groupId, String groupName) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => GroupChatScreen(
@@ -88,11 +88,11 @@ class _ListChatState extends State<ListGroup> {
                 title: Text(
                   groups['name'],
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
                 onTap: () {
-                  _goChat(loadedGroup[index].id, groups['name']);
+                  goChat(loadedGroup[index].id, groups['name']);
                 },
               ),
             );

@@ -20,7 +20,7 @@ class _ListChatState extends State<ListContact> {
   Widget build(BuildContext context) {
     final authUser = _firebaseAuth.currentUser!;
 
-    void _goChat(String userId) {
+    void goChat(String userId) {
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => ChatScreen(userId: userId),
@@ -80,11 +80,11 @@ class _ListChatState extends State<ListContact> {
               title: Text(
                 users['username'],
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
               ),
               onTap: () {
-                _goChat(loadedUser[index].id);
+                goChat(loadedUser[index].id);
               },
             );
           },
